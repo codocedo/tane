@@ -1,6 +1,6 @@
 '''
 Implementation of the Functional Dependency Canonical Cover Miner TANE as described in:
-[1] TANE - An Efficient Algorithm for Discovering Functional Approximate Dependencies
+[1] Hutala et al. - TANE: An Efficient Algorithm for Discovering Functional Approximate Dependencies. 1999.
 
 Copyright (C) 2018 Victor Codocedo <firstname.lastname@gmail.com>
 
@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 import sys
+import time
 from fca.defs.patterns.hypergraphs import TrimmedPartitionPattern
 from fca.io.transformers import List2PartitionsTransformer
 from itertools import combinations
@@ -277,6 +278,8 @@ class TANE(object):
 if __name__ == "__main__":
     T = read_db(sys.argv[1])
     tane = TANE(T)
+    t0 = time.time()
     tane.run()
-    print ('{} Rules Found'.format(len(tane.rules)))
+    print ("\t=> Execution Time: {} seconds".format(time.time()-t0))
+    print ('\t=> {} Rules Found'.format(len(tane.rules)))
     
