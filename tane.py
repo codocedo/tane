@@ -24,6 +24,12 @@ from fca.defs.patterns.hypergraphs import TrimmedPartitionPattern
 from fca.io.transformers import List2PartitionsTransformer
 from itertools import combinations
 
+# Get reduce for Python 3+
+try:
+    from functools import reduce
+except ImportError:
+    pass
+
 ##########################################################################################
 ## UTILS
 ##########################################################################################
@@ -36,7 +42,7 @@ def read_db(path):
                 break
             for i, s in enumerate(line.split(',')):
                 hashes.setdefault(i, {}).setdefault(s, set([])).add(t)# [(i, s)] = len(hashes)
-        return [PPattern.fix_desc(hashes[k].values()) for k in sorted(hashes.keys())]
+        return [PPattern.fix_desc(list(hashes[k].values())) for k in sorted(hashes.keys())]
 
 def tostr(atts):
     return ''.join([chr(65+i) for i in atts])
@@ -219,7 +225,7 @@ class TANE(object):
                 clean_idx.add(X)
             if self.pmgr.is_superkey(X): # Is Superkey, since it's a stripped partition, then it's an empty set
                 for y in filter(lambda x: x not in X, self.Cplus[X]):
-                    if y in reduce(set.intersection, [self.Cplus[tuple(sorted(X[:b]+X[b+1:]+(y,)))] for b in xrange(len(X))]):
+                    if y in reduce(set.intersection, [self.Cplus[tuple(sorted(X[:b]+X[b+1:]+(y,)))] for b in range(len(X))]):
                         self.rules.append((X, y))
                 clean_idx.add(X)
         for X in clean_idx:

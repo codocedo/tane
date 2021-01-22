@@ -11,7 +11,7 @@ Implementation used for academic purposes.
 - python -m pip install -r requirements.txt
 
 ## Requirements
-- Python 2
+- Python 2/3
 - requirements.txt (for pip)
 
 ## Usage:
