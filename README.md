@@ -11,7 +11,7 @@ Implementation used for academic purposes.
 - python -m pip install -r requirements.txt
 
 ## Requirements
-- Python 2/3
+- Python 3
 - requirements.txt (for pip)
 
 ## Usage:
@@ -37,3 +37,6 @@ Example: python tane.py experimental_datasets/diagnostics.csv
 
 ## Observations
 Mining some datasets may take several minutes or even hours.
+
+## Changelog
+- 28/04/2022 - Support for python 2.7 has been removed
